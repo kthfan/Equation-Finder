@@ -1,0 +1,38 @@
+classdef ExpressionNode
+    properties
+        children
+        parent
+        val
+    end
+    methods
+        function obj = ExpressionNode(val, children)
+            obj.val = val;
+            if nargin > 1
+                obj.children = children;
+                for i=1:numel(obj.children)
+                    obj.children{i}.parent = obj;
+                end
+            end
+        end
+        function depth = getDepth(obj)
+            depths = cellfun(@(o) o.getDepth(), obj.children);
+            depth = max(depths) + 1;
+        end
+        function count = getNodeCount(obj)
+            counts = cellfun(@(o) o.getNodeCount(), obj.children);
+            count = sum(counts) + 1;
+        end
+    end
+    methods(Static)
+        function obj = newNode(val, children)
+            if nargin == 1
+                obj = LeafNode(val);
+            elseif any(ismember(ExpressionTree.binary_operator_names, val))
+                obj = BinaryNode(val, children);
+            else
+                obj = FunctionNode(val, children);
+            end
+            
+        end
+   end
+end
