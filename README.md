@@ -19,4 +19,5 @@ A beautify estimated equation is showed on the bottom of UI.
 The "export model" button allow the trained model saved in the storage and "import model" button loads saved model into program.
 The "reset" button reset the model and clear all variables that store training information.
 
-
+# References
+1. Neapolitan, R., & Naimipour, K. (2010). Foundations of algorithms 5/e. Jones & Bartlett Publishers. In chapter 10.3.
